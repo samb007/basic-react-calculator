@@ -23,7 +23,7 @@ class App extends Component {
   calculationHandler = () =>{
     if (/[a-zA-Z]+/g.test(this.state.sum)){
         this.setState({
-          answer: "Syntax error"
+          answer: "Syntax Error"
         })
       }else{
     let answer = eval(this.state.sum)
