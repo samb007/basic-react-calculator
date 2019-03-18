@@ -1,25 +1,52 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+
 class App extends Component {
+  state = {
+    sum:"",
+    answer:"",
+    hasError: false
+  }
+
+  // buttonClick=(click)=>{
+  //   this.setState({
+  //     sum: this.state.sum +=click
+  //   })
+  // }
+
+  inputHandler =(e)=>{
+    this.setState({
+      sum: e.target.value
+    })
+  }
+  calculationHandler = () =>{
+    if (/[a-zA-Z]+/g.test(this.state.sum)){
+        this.setState({
+          answer: "Syntax error"
+        })
+      }else{
+    let answer = eval(this.state.sum)
+    this.setState({
+      answer: answer
+    })
+  }
+}
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <h1>My Calculator</h1>
+      <form >
+        <input 
+        type="text"  
+        placeholder="Input" 
+        onChange= {(e)=>this.inputHandler(e)}  
+        >
+        </input>
+      </form>
+      <h4>Your calculation:{this.state.sum}</h4>
+      <button onClick={this.calculationHandler}>Calculate</button>
+      <h4>{this.state.answer}</h4> 
       </div>
     );
   }
